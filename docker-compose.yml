@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  cqrs.application:
+    image: ${DOCKER_REGISTRY-}cqrsapplication
+    build:
+      context: .
+      dockerfile: Cqrs.Application/Dockerfile
+    ports:
+    - 8000:80
+    - 8001:443
+    networks:
+      - app-tier
+    depends_on:
+      - rabbitmq
+      - sqlserver
+
+  rabbitmq:
+    image: 'bitnami/rabbitmq:latest'
+    container_name: rabbitmq
+    hostname: rabbitmq
+    volumes:
+      - myapp:/var/lib/rabbitmq
+    environment:
+    - RABBITMQ_USERNAME=admin
+    - RABBITMQ_PASSWORD=admin
+    ports:
+    - 5672:5672
+    - 15672:15672
+    networks:
+      - app-tier
+
+  sqlserver:
+    image: 'mcr.microsoft.com/mssql/server'
+    container_name: sqlserver
+    environment:
+    - ACCEPT_EULA=Y
+    - SA_PASSWORD=Beto!1250
+    ports:
+    - 1433:1433
+    networks:
+      - app-tier
+
+networks:
+  app-tier:
+    driver: bridge
+
+volumes:
+  myapp:

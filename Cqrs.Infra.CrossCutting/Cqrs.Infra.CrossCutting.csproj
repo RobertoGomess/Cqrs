@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Filter\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cqrs.Domain\Cqrs.Domain.csproj" />
+    <ProjectReference Include="..\Cqrs.Infra.CrossCutting.Configuration\Cqrs.Infra.CrossCutting.Configuration.csproj" />
+    <ProjectReference Include="..\Cqrs.Infra.Data\Cqrs.Infra.Data.csproj" />
+    <ProjectReference Include="..\Cqrs.Service\Cqrs.Service.csproj" />
+  </ItemGroup>
+
+</Project>
